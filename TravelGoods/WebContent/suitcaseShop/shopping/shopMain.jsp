@@ -9,6 +9,7 @@
 <link href="../etc/style.css" rel="stylesheet" type="text/css">
 </head>
 <body bgcolor="<%=bodyback_c %>">
+<div class="container">
 <table>
 	<tr>
 		<td width="150" valign="top">
@@ -35,5 +36,6 @@
 		</td>
 	</tr>
 </table>
+</div>
 </body>
 </html>
