@@ -1,0 +1,73 @@
+@CHARSET "UTF-8";
+
+body {
+	font-size: 12px; 
+	text-align: center;
+	background : url('bg.jpg') no-repeat center center fixed;
+	background-size: 100% auto;
+}
+.container {
+	width : 1000px;
+	margin: 0 auto;	
+	padding : 20px;
+	border: 2pt solid black;
+}
+.container form {
+	margin : 20px auto;
+	padding : 20px;
+	font-size: 15px;
+	text-align: center;
+	border: 2pt solid black;
+	border-collapse : collapse;
+}
+
+.container ul {
+	list-style : none;
+}
+
+.container ul li {
+	display : inline-block;
+}
+
+.container table {
+	width : 600px;
+	margin : 0 auto;
+	padding : 1px;
+	font-size: 15px;
+	text-align: center;
+	border: 2pt solid black;
+	border-collapse : collapse;
+}
+
+table tr {
+	margin : 1px;
+	padding : 1px;
+}
+table tr td{
+	font-size: 15px;
+	border: 1pt solid lightgrey;
+}
+.result b{
+	padding : 5px 25px 5px 0px;
+	color : blue;
+}
+select {
+	font-size: 12px; 
+}
+a {
+	font-size: 15px;
+	text-decoration : none;
+	color : black;
+	font-weight : bold;
+	text-shadow : 1px 1px 1px white;
+}
+form {
+	font-size: 12px; 
+}
+
+p{
+	color : black;
+	font-weight: bold;
+	font-size: 20px; 
+	text-shadow : 1px 1px 1px white;
+}

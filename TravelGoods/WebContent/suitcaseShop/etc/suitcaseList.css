@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+body {
+	font-size: 15px; 
+	text-align: center;
+}
+.container {
+	width: 1000px;
+	text-align : center;
+	margin: 0 auto;
+}
+.list, .list tr, .list td {
+	font-size: 15px;
+	text-align: center;
+	border : 1px solid black;
+	border-collapse : collapse;	
+}
+select {
+	font-size: 12px; 
+}
+
+form {
+	font-size: 12px; 
+}
+
+p{
+	font-weight: bold;
+}
