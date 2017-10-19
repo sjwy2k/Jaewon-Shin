@@ -18,7 +18,7 @@ try {
 	
 	if(managerId == null || managerId.equals("")) {
 		response.sendRedirect("logon/managerLoginForm.jsp");
-	} else {
+	} else { 
 %>
 <form method="post" action="logon/managerLogout.jsp">
 	<b>관리작업중..</b><br><input type="submit" value="로그아웃">
