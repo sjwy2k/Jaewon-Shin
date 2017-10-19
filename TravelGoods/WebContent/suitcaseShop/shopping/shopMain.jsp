@@ -10,7 +10,7 @@
 </head>
 <body bgcolor="<%=bodyback_c %>">
 <div class="container">
-<table>
+<table> <!-- 집에서 작업 -->
 	<tr>
 		<td width="150" valign="top">
 			<img src="../module/logo.jpg" border="0" width="150" height="120">
