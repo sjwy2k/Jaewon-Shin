@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 
 
-public class ShopSuitcaseDBBean {
+public class ShopSuitcaseDBBean { // 집에서 작업 11
 	
 	private static ShopSuitcaseDBBean instance = new ShopSuitcaseDBBean();
 	
