@@ -16,8 +16,10 @@ String passwd = request.getParameter("passwd");
 
 CustomerDBBean member = CustomerDBBean.getInstance();
 int check = member.userCheck(id, passwd);
-
-if(check == 1) {
+if(check == 2) {
+	session.setAttribute("managerId", id);
+	response.sendRedirect("../manager/managerMain.jsp");
+} else if(check == 1) {
 	session.setAttribute("id", id);
 	response.sendRedirect("shopMain.jsp");
 } else if(check == 0) { %>

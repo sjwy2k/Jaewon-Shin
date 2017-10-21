@@ -21,7 +21,7 @@ String suitcase_kindName = "";
 
 ShopSuitcaseDBBean suitcasePro = ShopSuitcaseDBBean.getInstance();
 
-for(int i = 1; i <= 3; i++) {	
+for(int i = 1; i <= 5; i++) {	
 	suitcaseLists = suitcasePro.getSuitcases(i+"00", 3);
 	if(suitcaseLists[0].getSuitcase_kind().equals("100")) {
 		suitcase_kindName="20인치";
@@ -29,6 +29,10 @@ for(int i = 1; i <= 3; i++) {
 		suitcase_kindName="24인치";
 	} else if(suitcaseLists[0].getSuitcase_kind().equals("300")) {
 		suitcase_kindName="28인치";
+	} else if(suitcaseLists[0].getSuitcase_kind().equals("400")) {
+		suitcase_kindName="유아/아동용";
+	} else if(suitcaseLists[0].getSuitcase_kind().equals("500")) {
+		suitcase_kindName="여행가방 악세서리";
 	}
 %>
 <br><font size="+1"><b><%=suitcase_kindName %> 분류의 신상품목록 : 

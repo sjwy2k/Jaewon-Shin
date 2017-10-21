@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import SuitcaseShop.common.JDBCUtil; // 자카르타 JDBC Driver 설정
 
 public class CustomerDBBean {
 	
@@ -17,13 +15,7 @@ public class CustomerDBBean {
 	}
 	
 	private CustomerDBBean() { }
-	
-	private Connection getConnection() throws Exception {
-		Context initCtx = new InitialContext();
-		Context envCtx = (Context)initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource)envCtx.lookup("jdbc/basicjsp");
-		return ds.getConnection();
-	}
+		
 	
 	public void insertMember(CustomerDataBean member) throws Exception {
 		Connection conn = null;
@@ -31,7 +23,7 @@ public class CustomerDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "insert into member values(?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getId());
@@ -45,12 +37,7 @@ public class CustomerDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(pstmt, conn);
 		}
 	}
 	
@@ -63,34 +50,40 @@ public class CustomerDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
-			sql = "select passwd from member where id=?";
+			conn = JDBCUtil.getConnection();
+			sql = "select managerPasswd from manager where managerid=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				dbpasswd = rs.getString("passwd");
+				dbpasswd = rs.getString("managerPasswd");
 				if(dbpasswd.equals(passwd)) {
-					x = 1;
+					x = 2;
 				} else {
 					x = 0;
 				}
 			} else {
-				x = -1;
-			}
+				sql = "select passwd from member where id=?";
+				conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.executeQuery();
+				
+				if(rs.next()) {
+					dbpasswd = rs.getString("passwd");
+					if(dbpasswd.equals(passwd)) {
+						x = 1;
+					} else {
+						x = 0;
+					}
+				} else {
+					x = -1;
+				}
+			}						
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { 
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		return x;
 	}
@@ -103,7 +96,7 @@ public class CustomerDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select id from member where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -117,15 +110,7 @@ public class CustomerDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { 
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		return x;
 	}
@@ -138,7 +123,7 @@ public class CustomerDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select * from member where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -157,15 +142,7 @@ public class CustomerDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { 
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		return member;
 	}
@@ -177,7 +154,7 @@ public class CustomerDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "update member set passwd=?, name=?, tel=?, address=? "
 					+ "where id=?";
 			pstmt = conn.prepareStatement(sql);
@@ -192,12 +169,7 @@ public class CustomerDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(pstmt, conn);
 		}
 	}
 	
@@ -210,7 +182,7 @@ public class CustomerDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select passwd from member where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -220,7 +192,7 @@ public class CustomerDBBean {
 				dbpasswd = rs.getString("passwd");
 				if(dbpasswd.equals(passwd)) {
 					sql = "delete from member where id=?";
-					pstmt = conn.prepareStatement(sql);
+					conn.prepareStatement(sql);
 					pstmt.setString(1, id);
 					pstmt.executeUpdate();
 					x = 1;
@@ -231,15 +203,7 @@ public class CustomerDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { 
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		return x;
 	}

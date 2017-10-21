@@ -11,7 +11,7 @@
 <body>
 <script>
 	alert("로그아웃 되었습니다");
-	location.href="../managerMain.jsp";
+	location.href="../../shopping/shopMain.jsp";
 </script>
 </body>
 </html>

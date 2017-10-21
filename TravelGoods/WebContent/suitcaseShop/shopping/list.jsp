@@ -30,68 +30,80 @@ if(suitcase_kind.equals("100")) {
 	suitcase_kindName="24인치";
 } else if(suitcase_kind.equals("300")) {
 	suitcase_kindName="28인치";
+} else if(suitcase_kind.equals("400")) {
+	suitcase_kindName="유/아동용";
+} else if(suitcase_kind.equals("500")) {
+	suitcase_kindName="여행가방 악세서리";
 } else if(suitcase_kind.equals("all")) {
 	suitcase_kindName="전체";
 }
 %>
 <div class="container">
 <table>
-<tr>
-	<td width="150" valign="top">
-		<jsp:include page="../module/left.jsp" flush="false" />
-	</td>
-	<td width="700">
-		<h3><b><%=suitcase_kindName %> 분류의 목록</b></h3>
-		<a href="shopMain.jsp">메인으로</a>
-		<br>
-		<%
-		for(int i = 0; i < suitcaseLists.size(); i++) {
-			suitcaseList = (ShopSuitcaseDataBean)suitcaseLists.get(i);
-		%>
-		<table>
-			<tr>
-				<td colspan="2" width="450">
-					<a
-href="suitcaseContent.jsp?suitcase_id=<%=suitcaseList.getSuitcase_id()%>&suitcase_kind=<%=suitcaseList.getSuitcase_kind()%>">
-				<img src="../../imageFile/<%=suitcaseList.getSuitcase_image()%>"
-					border="0" width="98%" height="600"></a></td>
-			</tr>			
-			<tr height="30" bgcolor="<%=value_c %>">				
-				<td width="350">
-				<font size="+1">
-					<b><a
-href="suitcaseContent.jsp?suitcase_id=<%=suitcaseList.getSuitcase_id()%>&suitcase_kind=<%=suitcaseList.getSuitcase_kind()%>">
-					<%=suitcaseList.getSuitcase_title()%>
-					</a></b>
-					</font>
-				</td>
-				<td rowspan="4" width="100">
-					<%if(suitcaseList.getSuitcase_count() == 0) {%>
-					<font color="red"><b>일시품절</b></font>
-					<%} else { %>
-					<font color="blue"><b>★신상품★</b></font>
-					<%} %>
-				</td>
+	<tr>
+		<td width="150" valign="top">
+			<img src="../module/logo.jpg" border="0" width="150" height="120">
+		</td>
+		<td>
+			<jsp:include page="../module/top.jsp" flush="false"/>
+		</td>		
+	</tr>
+	<tr>
+		<td width="150" valign="top">
+			<jsp:include page="../module/left.jsp" flush="false" />
+		</td>
+		<td width="700">
+			<h3><b><%=suitcase_kindName %> 분류의 목록</b></h3>
+			<a href="shopMain.jsp">메인으로</a>
+			<br>
+			<%
+			for(int i = 0; i < suitcaseLists.size(); i++) {
+				suitcaseList = (ShopSuitcaseDataBean)suitcaseLists.get(i);
+			%>
+			<table>
+				<tr>
+					<td colspan="2" width="450">
+						<a
+	href="suitcaseContent.jsp?suitcase_id=<%=suitcaseList.getSuitcase_id()%>&suitcase_kind=<%=suitcaseList.getSuitcase_kind()%>">
+					<img src="../../imageFile/<%=suitcaseList.getSuitcase_image()%>"
+						border="0" width="98%" height="600"></a></td>
+				</tr>			
+				<tr height="30" bgcolor="<%=value_c %>">				
+					<td width="350">
+					<font size="+1">
+						<b><a
+	href="suitcaseContent.jsp?suitcase_id=<%=suitcaseList.getSuitcase_id()%>&suitcase_kind=<%=suitcaseList.getSuitcase_kind()%>">
+						<%=suitcaseList.getSuitcase_title()%>
+						</a></b>
+						</font>
+					</td>
+					<td rowspan="4" width="100">
+						<%if(suitcaseList.getSuitcase_count() == 0) {%>
+						<font color="red"><b>일시품절</b></font>
+						<%} else { %>
+						<font color="blue"><b>★신상품★</b></font>
+						<%} %>
+					</td>
+				</tr>
+				<tr height="30" bgcolor="<%=value_c%>">
+				<td width="350">제조사 : <%=suitcaseList.getManufacturer() %></td>
 			</tr>
 			<tr height="30" bgcolor="<%=value_c%>">
-			<td width="350">제조사 : <%=suitcaseList.getManufacturer() %></td>
-		</tr>
-		<tr height="30" bgcolor="<%=value_c%>">
-			<td width="350">제조국가 : <%=suitcaseList.getProduct_con() %></td>
-		</tr>
-		<tr height="30" bgcolor="<%=value_c%>">
-			<td width="350">정가 
-: <b><del><%=NumberFormat.getInstance().format(suitcaseList.getSuitcase_price())%></del></b>원<br>
-							할인가 : <b><font color="red" size="5">
- <%=NumberFormat.getInstance().format((int)(suitcaseList.getSuitcase_price()*
-((double)(100-suitcaseList.getDiscount_rate())/100))) %></font></b>원
-			</td>
-		</tr>
-		</table>
-		<br>
-	<%} %>
-	</td>
-</tr>
+				<td width="350">제조국가 : <%=suitcaseList.getProduct_con() %></td>
+			</tr>
+			<tr height="30" bgcolor="<%=value_c%>">
+				<td width="350">정가 
+	: <b><del><%=NumberFormat.getInstance().format(suitcaseList.getSuitcase_price())%></del></b>원<br>
+								할인가 : <b><font color="red" size="5">
+	 <%=NumberFormat.getInstance().format((int)(suitcaseList.getSuitcase_price()*
+	((double)(100-suitcaseList.getDiscount_rate())/100))) %></font></b>원
+				</td>
+			</tr>
+			</table>
+			<br>
+		<%} %>
+		</td>
+	</tr>
 </table>
 </div>
 </body>

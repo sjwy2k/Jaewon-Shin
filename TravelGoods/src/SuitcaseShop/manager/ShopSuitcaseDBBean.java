@@ -6,13 +6,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import SuitcaseShop.common.JDBCUtil; // 자카르타 JDBC Driver 설정
 
-
-
-public class ShopSuitcaseDBBean { // 집에서 작업 11
+public class ShopSuitcaseDBBean {
 	
 	private static ShopSuitcaseDBBean instance = new ShopSuitcaseDBBean();
 	
@@ -22,13 +18,6 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 	
 	private ShopSuitcaseDBBean() { }
 		
-	private Connection getConnection() throws Exception{
-		Context initCtx = new InitialContext();
-		Context envCtx = (Context)initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource)envCtx.lookup("jdbc/basicjsp");
-		return ds.getConnection();
-	}
-	
 	public int managerCheck(String id, String passwd) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -38,7 +27,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select managerPasswd from manager where managerId = ?";			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -58,9 +47,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(rs, pstmt, conn);	
 		}
 		
 		return x;
@@ -72,7 +59,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		String sql = ""; 
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
 			sql = "insert into suitcase values(suitcase_id.nextval,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
@@ -93,8 +80,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(pstmt, conn);	
 		}
 	}
 	
@@ -107,7 +93,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select count(*) from suitcase";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -119,9 +105,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		
 		return x;
@@ -137,7 +121,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		String sql2 = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql1 = "select * from suitcase order by reg_date desc";
 			sql2 = "select * from suitcase "
 					+ "where suitcase_kind = ? order by reg_date desc";
@@ -174,9 +158,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		
 		return suitcaseList;
@@ -192,7 +174,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
 			//MySQL
 			/*sql = "select * from suitcase where suitcase_kind = ? order by reg_date desc limit ?,?";*/
@@ -234,9 +216,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(rs, pstmt, conn);	
 		}
 		
 		return suitcaseList;
@@ -251,7 +231,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
 			sql = "select * from suitcase where suitcase_id = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -277,9 +257,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(rs, pstmt, conn);	
 		}
 		
 		return suitcase;
@@ -291,7 +269,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
 			sql = "update suitcase set suitcase_kind = ?, suitcase_title = ?, suitcase_price = ?, suitcase_count = ?,"
 					+ "manufacturer = ?, product_con = ?, product_date = ?, suitcase_image = ?,"
@@ -315,8 +293,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(pstmt, conn);	
 		}
 	}
 	
@@ -327,7 +304,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
 			sql = "delete from suitcase where suitcase_id = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -337,9 +314,7 @@ public class ShopSuitcaseDBBean { // 집에서 작업 11
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(rs, pstmt, conn);	
 		}
 	}
 

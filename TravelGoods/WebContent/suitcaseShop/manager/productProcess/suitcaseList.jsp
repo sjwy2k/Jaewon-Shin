@@ -57,6 +57,10 @@ try {
 		suitcase_kindName="24인치";
 	} else if(suitcase_kind.equals("300")){
 		suitcase_kindName="28인치";
+	} else if(suitcase_kind.equals("400")){
+		suitcase_kindName="유/아동용 여행가방";
+	} else if(suitcase_kind.equals("500")){
+		suitcase_kindName="여행가방 악세사리";
 	} else if(suitcase_kind.equals("all")){
 		suitcase_kindName="전체";
 	}

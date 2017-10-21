@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import SuitcaseShop.common.JDBCUtil; // 자카르타 JDBC Driver 설정
 
 import SuitcaseShop.manager.ManagerDataBean;
 
@@ -22,13 +20,6 @@ private static ManagerDBBean instance = new ManagerDBBean();
 	
 	private ManagerDBBean() { }
 		
-	private Connection getConnection() throws Exception{
-		Context initCtx = new InitialContext();
-		Context envCtx = (Context)initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource)envCtx.lookup("jdbc/basicjsp");
-		return ds.getConnection();
-	}
-	
 	public int managerCheck(String id, String passwd) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -38,7 +29,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select managerPasswd from manager where managerId = ?";			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -58,9 +49,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(rs, pstmt, conn);	
 		}
 		
 		return x;
@@ -75,7 +64,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select * from manager order by managerId desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -94,9 +83,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }	
+			JDBCUtil.close(rs, pstmt, conn);	
 		}
 		
 		return managerList;
@@ -109,7 +96,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "insert into manager values(?,?)";
 			pstmt = conn.prepareStatement(sql);
 			
@@ -121,12 +108,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(pstmt, conn);
 		}
 	}
 	
@@ -138,7 +120,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select managerId from manager where managerId=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, managerId);
@@ -152,15 +134,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { 
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		return x;
 	}
@@ -173,7 +147,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select * from manager where managerId=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, managerId);
@@ -189,15 +163,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { 
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		return manager;
 	}
@@ -209,7 +175,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "update manager set managerPasswd=?, managerId=? "
 					+ "where managerId=?";
 			pstmt = conn.prepareStatement(sql);
@@ -222,12 +188,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(pstmt, conn);
 		}
 	}
 	
@@ -240,7 +201,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "select managerPasswd from manager where managerId=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, managerId);
@@ -250,7 +211,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 				dbpasswd = rs.getString("managerPasswd");
 				if(dbpasswd.equals(managerPasswd)) {
 					sql = "delete from manager where managerId=?";
-					pstmt = conn.prepareStatement(sql);
+					conn.prepareStatement(sql);
 					pstmt.setString(1, managerId);
 					pstmt.executeUpdate();
 					x = 1;
@@ -261,15 +222,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { 
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) { 
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		return x;
 	}

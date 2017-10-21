@@ -22,6 +22,9 @@ try {
 %>
 <form method="post" action="logon/managerLogout.jsp">
 	<b>관리작업중..</b><br><input type="submit" value="로그아웃">
+	
+	<input type="button" value="계정 생성" onclick="javascript:window.location='managerJoin/joinManagerForm.jsp'">
+	<input type="button" value="계정 조회" onclick="javascript:window.location='managerJoin/managerIdList.jsp'">
 </form>
 <table>
 	<tr><td align="center" bgcolor="<%=bar %>">상품관련 작업</td></tr>

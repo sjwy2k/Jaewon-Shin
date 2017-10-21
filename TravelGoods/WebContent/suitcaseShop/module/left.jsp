@@ -14,6 +14,8 @@
 <a href="../shopping/list.jsp?suitcase_kind=100">20인치 캐리어</a><br>
 <a href="../shopping/list.jsp?suitcase_kind=200">24인치 캐리어</a><br>
 <a href="../shopping/list.jsp?suitcase_kind=300">28인치 캐리어</a><br>
+<a href="../shopping/list.jsp?suitcase_kind=400">유/아동용 캐리어</a><br>
+<a href="../shopping/list.jsp?suitcase_kind=500">여행가방 악세서리</a><br>
 
 <%
 String buyer = (String) session.getAttribute("id");

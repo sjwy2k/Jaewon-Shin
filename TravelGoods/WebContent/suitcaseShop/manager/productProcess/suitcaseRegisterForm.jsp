@@ -22,7 +22,7 @@ try {
 
 <p>캐리어 상품 등록</p>
 <br>
-
+<div class="container">
 <form method="post" name="writeform" 
 action="suitcaseRegisterPro.jsp" enctype="multipart/form-data"> 
 <table style="align:center">		<!-- 이미지 파일 등록 -->
@@ -34,10 +34,12 @@ action="suitcaseRegisterPro.jsp" enctype="multipart/form-data">
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">분류 선택</td>
 		<td width="400" align="left">
-			<select name="suitcase_kind"> <!-- 캐리어 종류는 3종류로 -->
+			<select name="suitcase_kind"> 
 				<option value="100">20인치</option>
 				<option value="200">24인치</option>
 				<option value="300">28인치</option>
+				<option value="400">유/아동용</option>
+				<option value="500">여행가방 악세서리</option>
 			</select>
 		</td>
 	</tr>
@@ -118,11 +120,12 @@ action="suitcaseRegisterPro.jsp" enctype="multipart/form-data">
 	</tr>
 </table>
 </form>
-</body>
-</html>
+</div>
 <%
 	}
 }catch(Exception e) {
 	e.printStackTrace();
 }
 %>
+</body>
+</html>
