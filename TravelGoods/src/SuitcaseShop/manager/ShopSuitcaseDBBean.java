@@ -183,9 +183,7 @@ public class ShopSuitcaseDBBean {
 					+ "(select rownum as rnum, bo.* "
 					+ "from (select * from suitcase where suitcase_kind = ? order by reg_date desc) bo) "
 					+ "where rnum between ? and ?";
-			
-			
-			
+						
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, suitcase_kind);
 			pstmt.setInt(2, 1);
@@ -311,6 +309,7 @@ public class ShopSuitcaseDBBean {
 			pstmt.setInt(1, suitcaseId);
 			
 			pstmt.executeUpdate();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

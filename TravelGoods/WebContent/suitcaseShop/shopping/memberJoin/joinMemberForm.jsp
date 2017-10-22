@@ -3,20 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>관리자 계정 생성 페이지</title>
-<link href="../../etc/style.css" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8">
+  <title>회원 가입 페이지</title>  
+      <link rel="stylesheet" href="css/style.css">  
 </head>
 <body>
-<div class="container">
-<form method="post" action="joinManagerPro.jsp">
-<h3>회원 계정 생성</h3>
-<label>아이디 : </label><input type="text" name="id"><br>
-<label>비밀번호 : </label><input type="password" name="passwd"><br>
-<input type="submit" value="확인">&nbsp;
-			<input type="button" value="취소"
-			onclick="javascript:window.location='../managerMain.jsp'">
-</form>
+  <div class="login-wrap">
+  <h2>회원 가입</h2>  
+  <div class="form">
+  	<form method="post" action="joinMemberPro.jsp">
+	    <input type="text" placeholder="아이디" name="id" />
+	    <input type="password" placeholder="비밀번호" name="passwd" />
+	    <input type="text" placeholder="이름" name="name" />
+	    <input type="text" placeholder="주소" name="address" />
+	    <input type="text" placeholder="전화번호" name="tel" />
+	    <button> 가입하기 </button>
+	    <a href="../shopMain.jsp"><p> 쇼핑몰로 돌아가기</p></a>
+    </form>
+  </div>
 </div>
+  <script src='https://code.jquery.com/jquery-1.10.0.min.js'></script>
+  <script  src="js/index.js"></script>
 </body>
 </html>

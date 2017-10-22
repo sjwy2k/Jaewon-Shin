@@ -4,20 +4,20 @@ body {
 	font-size: 12px; 
 	text-align: center;
 	background : url('bg.jpg') no-repeat center center fixed;
-	background-size: 100% auto;
+	background-size: 100% 100%;
 }
 .container {
-	width : 1000px;
 	margin: 0 auto;	
 	padding : 20px;
-	border: 2pt solid black;
+	border: 1pt solid silver;
 }
 .container form {
+	width : 1000px;
 	margin : 20px auto;
 	padding : 20px;
 	font-size: 15px;
 	text-align: center;
-	border: 2pt solid black;
+	border: 1pt solid silver;
 	border-collapse : collapse;
 }
 
@@ -30,13 +30,19 @@ body {
 }
 
 .container table {
-	width : 600px;
 	margin : 0 auto;
 	padding : 1px;
 	font-size: 15px;
 	text-align: center;
-	border: 2pt solid black;
+	border: 1pt solid silver;
 	border-collapse : collapse;
+}
+
+.list, .list tr, .list td {
+	font-size: 15px;
+	text-align: center;
+	border : 1px solid black;
+	border-collapse : collapse;	
 }
 
 table tr {
@@ -71,3 +77,5 @@ p{
 	font-size: 20px; 
 	text-shadow : 1px 1px 1px white;
 }
+
+

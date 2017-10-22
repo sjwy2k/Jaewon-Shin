@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="SuitcaseShop.manager.ManagerDBBean" %>
-<%@ page import="SuitcaseShop.manager.ManagerDataBean" %>
+<%@ page import="SuitcaseShop.customer.CustomerDBBean" %>
+<%@ page import="SuitcaseShop.customer.CustomerDataBean" %>
+<%@ page import="java.sql.Timestamp" %>
 
 <% request.setCharacterEncoding("utf-8"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,22 +13,29 @@
 <title></title>
 </head>
 <body>
-
 <%
-String managerId = request.getParameter("id");
-String managerId2 = request.getParameter("id2");
-String managerPasswd = request.getParameter("passwd");
 
-ManagerDBBean managerPro = ManagerDBBean.getInstance();
-ManagerDataBean manager = new ManagerDataBean();
-manager.setManagerId(managerId);
-manager.setManagerPasswd(managerPasswd);
+String passwd = request.getParameter("passwd");
+String name = request.getParameter("name");
+String address = request.getParameter("address");
+String tel = request.getParameter("tel");
+String id = request.getParameter("id");
 
-managerPro.updateManager(manager, managerId2);
+
+CustomerDBBean memberPro = CustomerDBBean.getInstance();
+CustomerDataBean member = new CustomerDataBean();
+
+member.setPasswd(passwd);
+member.setName(name);
+member.setAddress(address);
+member.setTel(tel);
+member.setId(id);
+
+memberPro.updateMember(member);
 %>
 <script>
-	alert("관리자 계정이 수정되었습니다.");
-	location.href="managerIdList.jsp";
+	alert("회원 정보가 수정되었습니다.");
+	location.href="../shopMain.jsp";
 </script>
 </body>
 </html>

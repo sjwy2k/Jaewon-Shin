@@ -1,0 +1,83 @@
+@CHARSET "UTF-8";
+
+	body {
+		background: url('../images/bg.jpg' ) no-repeat;
+		background-size: 100% 100%;
+		font-family: '맑은 고딕', '고딕', '굴림';
+	}	
+	.container {
+		width : 1000px;
+		height : 1000px; 
+		margin: 0 auto;
+		text-align: center;
+		font-size: 12px;
+	}	
+	header h1 {
+		padding-top: 100px;
+		font-weight: bold;
+		font-size: 25px;
+		font-size: 3em;
+		margin: 0 auto;
+		color : #003A51;			
+	}
+	header h2 {
+		font-size: 2em;
+		font-weight: bold;
+		text-decoration : none;
+		color : #003A51;	
+	}	
+	header table a{
+		width : 50px;
+		height : 20px;
+	}
+	header p{
+		padding-top: 100px;
+		font-weight: bold;
+		font-size: 15px;
+	}
+	section table {
+		margin : 30px 150px 10px 100px;
+		font-size : 12px;
+	}
+	.new {
+		border: 1px solid black;
+		float:right;
+		margin-right: 150px;
+		font-size : 30px;
+	}
+	.mainboard {
+		margin-top: 50px;
+		clear: both;
+		background-color: #E8CEC2;
+		font-size:1.2em;	
+		border: 1px solid black;
+		border-collapse: collapse;	
+	}
+	section {
+		margin-top : 80px;
+	}
+	.mainboard tr td{
+		border : 1px solid black;
+		border-collapse : collapse;
+	}
+	.mainboard tr td a{
+		text-decoration : none;
+		color : black;
+		padding-left : 5px;
+	}
+	.index, .new tr td, .new tr td a {
+		background-color : #EDA900;
+		font-weight: bold;
+		text-decoration : none;
+		color : #003A51;
+	}
+	.pagenum a {
+		margin: 5px;
+		text-decoration : none;
+		color : #B77300;
+		font-weight : bold;
+		font-size : 17px;	
+	}
+
+
+

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="SuitcaseShop.manager.ManagerDBBean" %>
-<%@ page import="SuitcaseShop.manager.ManagerDataBean" %>
+<%@ page import="SuitcaseShop.customer.CustomerDBBean" %>
+<%@ page import="SuitcaseShop.customer.CustomerDataBean" %>
+<%@ page import="java.sql.Timestamp" %>
 
 <% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
@@ -13,22 +14,29 @@
 <body>
 
 <%
-String managerId = request.getParameter("id");
-String managerPasswd = request.getParameter("passwd");
+String id = request.getParameter("id");
+String passwd = request.getParameter("passwd");
+String name = request.getParameter("name");
+String address= request.getParameter("address");
+String tel = request.getParameter("tel");
 
-ManagerDBBean managerPro = ManagerDBBean.getInstance();
-ManagerDataBean manager = new ManagerDataBean();
-manager.setManagerId(managerId);
-manager.setManagerPasswd(managerPasswd);
+CustomerDBBean memberPro = CustomerDBBean.getInstance();
+CustomerDataBean member = new CustomerDataBean();
+member.setId(id);
+member.setPasswd(passwd);
+member.setName(name);
+member.setReg_date(new Timestamp(System.currentTimeMillis()));
+member.setAddress(address);
+member.setTel(tel);
 
-int check = managerPro.confirmManagerId(managerId);
+int check = memberPro.userCheck(id, passwd);
 
 if(check == -1) {	
-	managerPro.insertManager(manager);
+	memberPro.insertMember(member);
 %>
 <script>
-	alert("관리자 계정이 생성되었습니다.");
-	location.href="../managerMain.jsp";
+	alert("회원 가입이 완료 되었습니다.");
+	location.href="../shopMain.jsp";
 </script>
 <%	
 } else { %>

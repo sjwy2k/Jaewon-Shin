@@ -7,9 +7,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import SuitcaseShop.common.JDBCUtil; // 자카르타 JDBC Driver 설정
 
 import SuitcaseShop.cart.CartDataBean;
 
@@ -21,15 +19,7 @@ public class BuyDBBean {
 	}
 	
 	private BuyDBBean() { }
-	
-	private Connection getConnection() throws Exception {
-		Context initCtx = new InitialContext();
-		Context envCtx = (Context) initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource)envCtx.lookup("jdbc/basicjsp");
-		return ds.getConnection();
-	}
-	
-	
+		
 	// 구매 테이블인 buy에 구매목록 등록, 5개의 SQL 쿼리
 	public void insertBuy(
 		List<CartDataBean> lists, String id, String account, 
@@ -50,7 +40,7 @@ public class BuyDBBean {
 		short nowCount;
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			reg_date = new Timestamp(System.currentTimeMillis());
 			todayDate = reg_date.toString();
 			compareDate = todayDate.substring(0, 4) + 
@@ -109,7 +99,7 @@ public class BuyDBBean {
 				pstmt.executeUpdate();
 				// 쿼리 3. 아이디에 해당하는 재고수량 조회
 				sql = "select suitcase_count from suitcase where suitcase_id=?";
-				pstmt = conn.prepareStatement(sql);
+				conn.prepareStatement(sql);
 				pstmt.setInt(1, cart.getSuitcase_id());
 				
 				rs = pstmt.executeQuery();
@@ -119,7 +109,7 @@ public class BuyDBBean {
 				nowCount = (short)(rs.getShort(1) - cart.getBuy_count());
 				// 쿼리 4. 재고량 갱신
 				sql = "update suitcase set suitcase_count=? where suitcase_id = ?";
-				pstmt = conn.prepareStatement(sql);
+				conn.prepareStatement(sql);
 				
 				pstmt.setShort(1, nowCount);
 				pstmt.setInt(2, cart.getSuitcase_id());
@@ -129,7 +119,7 @@ public class BuyDBBean {
 			}
 			// 쿼리 5. 구매 완료 후 장바구니에 해당 구매품목 삭제.
 			sql = "delete from cart where buyer=?";
-			pstmt = conn.prepareStatement(sql);
+			conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			
 			pstmt.executeUpdate();
@@ -140,15 +130,7 @@ public class BuyDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) {
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 	}
 	// id에 해당하는  buy 테이블의 레코드를 조회하는 메서드 
@@ -161,7 +143,7 @@ public class BuyDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 						
 			sql = "select count(*) from buy where buyer=?";
 			pstmt = conn.prepareStatement(sql);
@@ -176,15 +158,7 @@ public class BuyDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) {
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		
 		return x;
@@ -199,7 +173,7 @@ public class BuyDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 						
 			sql = "select count(*) from buy";
 			pstmt = conn.prepareStatement(sql);
@@ -213,15 +187,7 @@ public class BuyDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) {
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		
 		return x;
@@ -238,7 +204,7 @@ public class BuyDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 						
 			sql = "select * from buy where buyer = ?";
 			pstmt = conn.prepareStatement(sql);
@@ -264,15 +230,7 @@ public class BuyDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) {
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		
 		return lists;
@@ -289,7 +247,7 @@ public class BuyDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 						
 			sql = "select * from buy";
 			pstmt = conn.prepareStatement(sql);
@@ -320,15 +278,7 @@ public class BuyDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) {
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		
 		return lists;

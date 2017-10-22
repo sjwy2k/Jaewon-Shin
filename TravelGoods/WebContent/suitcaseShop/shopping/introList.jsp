@@ -30,9 +30,9 @@ for(int i = 1; i <= 5; i++) {
 	} else if(suitcaseLists[0].getSuitcase_kind().equals("300")) {
 		suitcase_kindName="28인치";
 	} else if(suitcaseLists[0].getSuitcase_kind().equals("400")) {
-		suitcase_kindName="유아/아동용";
+		suitcase_kindName="하드케이스";
 	} else if(suitcaseLists[0].getSuitcase_kind().equals("500")) {
-		suitcase_kindName="여행가방 악세서리";
+		suitcase_kindName="소프트케이스";
 	}
 %>
 <br><font size="+1"><b><%=suitcase_kindName %> 분류의 신상품목록 : 
@@ -67,13 +67,13 @@ href="suitcaseContent.jsp?suitcase_id=<%=suitcaseLists[j].getSuitcase_id()%>&sui
 			<%} %>
 			</td>
 		</tr>
-		<tr height="30" bgcolor="<%=value_c%>">
+		<tr height="30" bgcolor="<%=bar%>"> 
 			<td width="350">제조사: <%=suitcaseLists[j].getManufacturer() %></td>
 		</tr>
-		<tr height="30" bgcolor="<%=value_c%>">
+		<tr height="30" bgcolor="<%=bar%>">
 			<td width="350">제조국가 : <%=suitcaseLists[j].getProduct_con() %></td>
 		</tr>
-		<tr height="30" bgcolor="<%=value_c%>">
+		<tr height="30" bgcolor="<%=bar%>">
 			<td width="350">정가 
 : <b><del><%=NumberFormat.getInstance().format(suitcaseLists[j].getSuitcase_price())%></del></b>원<br>
 							판매가 : <b><font color="red" size="5">

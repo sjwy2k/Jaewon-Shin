@@ -65,19 +65,22 @@ public class CustomerDBBean {
 				}
 			} else {
 				sql = "select passwd from member where id=?";
-				conn.prepareStatement(sql);
+				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
-				pstmt.executeQuery();
+				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
 					dbpasswd = rs.getString("passwd");
 					if(dbpasswd.equals(passwd)) {
 						x = 1;
+						System.out.println("아이디 존재");
 					} else {
 						x = 0;
+						System.out.println("비밀번호 불일치");
 					}
 				} else {
 					x = -1;
+					System.out.println("아이디 존재하지 않음");
 				}
 			}						
 		} catch(Exception e) {
@@ -124,12 +127,14 @@ public class CustomerDBBean {
 		
 		try {
 			conn = JDBCUtil.getConnection();
+			System.out.println("아이디 확인" + id);
 			sql = "select * from member where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
+
 			if(rs.next()) {
+				System.out.println("member 세팅");
 				member = new CustomerDataBean();
 				
 				member.setId(rs.getString("id"));
@@ -173,7 +178,7 @@ public class CustomerDBBean {
 		}
 	}
 	
-	public int deleteNumber(String id, String passwd) throws Exception {
+	public int deleteMember(String id, String passwd) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -192,7 +197,7 @@ public class CustomerDBBean {
 				dbpasswd = rs.getString("passwd");
 				if(dbpasswd.equals(passwd)) {
 					sql = "delete from member where id=?";
-					conn.prepareStatement(sql);
+					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, id);
 					pstmt.executeUpdate();
 					x = 1;

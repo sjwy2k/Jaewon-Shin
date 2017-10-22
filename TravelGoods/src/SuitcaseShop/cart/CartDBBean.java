@@ -6,14 +6,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
+import SuitcaseShop.common.JDBCUtil; // 자카르타 JDBC Driver 설정
 
 
 public class CartDBBean {
-private static CartDBBean instance = new CartDBBean();
+	
+	private static CartDBBean instance = new CartDBBean();
 	
 	public static CartDBBean getInstance() {
 		return instance;
@@ -21,12 +19,6 @@ private static CartDBBean instance = new CartDBBean();
 	
 	private CartDBBean() { }
 	
-	private Connection getConnection() throws Exception {
-		Context initCtx = new InitialContext();
-		Context envCtx = (Context)initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource)envCtx.lookup("jdbc/basicjsp");
-		return ds.getConnection();
-	}
 	
 	public void insertCart(CartDataBean cart) throws Exception {
 		Connection conn = null;
@@ -34,7 +26,7 @@ private static CartDBBean instance = new CartDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = 
 "insert into cart(cart_id, suitcase_id, buyer, suitcase_title, "
 + "buy_price, buy_count, suitcase_image) values(cart_id.nextval,?,?,?,?,?,?)";
@@ -52,8 +44,7 @@ private static CartDBBean instance = new CartDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }
+			JDBCUtil.close(pstmt, conn);
 		}
 	}
 	
@@ -66,10 +57,9 @@ private static CartDBBean instance = new CartDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
-			sql = 
-"select count(*) from cart where buyer=?";
+			sql = "select count(*) from cart where buyer=?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, id);
@@ -82,9 +72,7 @@ private static CartDBBean instance = new CartDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		return x;
 	}
@@ -99,10 +87,9 @@ private static CartDBBean instance = new CartDBBean();
 		List<CartDataBean> lists = null;
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
-			sql = 
-"select * from cart where buyer = ?";
+			sql = "select * from cart where buyer = ?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, id);
@@ -126,9 +113,7 @@ private static CartDBBean instance = new CartDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) { try { rs.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		return lists;
 	}
@@ -139,7 +124,7 @@ private static CartDBBean instance = new CartDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
 			sql = "update cart set buy_count=? where cart_id=?";
 			pstmt = conn.prepareStatement(sql);
@@ -151,8 +136,7 @@ private static CartDBBean instance = new CartDBBean();
 		}catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }
+			JDBCUtil.close(pstmt, conn);
 		}
 	}
 	
@@ -162,7 +146,7 @@ private static CartDBBean instance = new CartDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
 			sql = "delete from cart where cart_id=?";
 			pstmt = conn.prepareStatement(sql);
@@ -174,8 +158,7 @@ private static CartDBBean instance = new CartDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {			
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }
+			JDBCUtil.close(pstmt, conn);
 		}
 	}
 	
@@ -185,7 +168,7 @@ private static CartDBBean instance = new CartDBBean();
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
 			sql = "delete from cart where buyer=?";
 			pstmt = conn.prepareStatement(sql);
@@ -197,8 +180,7 @@ private static CartDBBean instance = new CartDBBean();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {			
-			if(pstmt != null) { try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } }
-			if(conn != null) { try { conn.close(); } catch(Exception e) { e.printStackTrace(); } }
+			JDBCUtil.close(pstmt, conn);
 		}
 	}
 }

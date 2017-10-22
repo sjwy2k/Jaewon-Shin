@@ -3,13 +3,11 @@ package SuitcaseShop.account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import SuitcaseShop.common.JDBCUtil; // 자카르타 JDBC Driver 설정
 
 public class BankDBBean {
 	private static BankDBBean instance = new BankDBBean();
@@ -19,15 +17,7 @@ public class BankDBBean {
 	}
 	
 	private BankDBBean() { }
-	
-	private Connection getConnection() throws Exception {
-		Context initCtx = new InitialContext();
-		Context envCtx = (Context) initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource) envCtx.lookup("jdbc/basicjsp");
 		
-		return ds.getConnection();
-	}
-	
 	// bank 테이블에 계좌를 등록
 	public void insertAccount(BankDataBean member) throws Exception {
 		Connection conn = null;
@@ -37,7 +27,7 @@ public class BankDBBean {
 		
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			sql = "insert into bank (id, account, bank, reg_date) values(?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
@@ -51,15 +41,7 @@ public class BankDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); } 
-			}
-			if(pstmt != null) {
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); } 
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); } 
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 	}
 	
@@ -72,7 +54,7 @@ public class BankDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 			
 			sql = "select account, bank, name from member "
 				+ "m inner join bank b on m.id = b.id "
@@ -93,15 +75,7 @@ public class BankDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) {
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 		
 		return accountList;
@@ -115,7 +89,7 @@ public class BankDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 						
 			sql = "update bank set account=?, bank=?, reg_date=? "
 					+ "where id=? and account=?";
@@ -131,15 +105,7 @@ public class BankDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try { rs.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(pstmt != null) {
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(rs, pstmt, conn);
 		}
 	}	
 	
@@ -149,7 +115,7 @@ public class BankDBBean {
 		String sql = "";
 		
 		try {
-			conn = getConnection();
+			conn = JDBCUtil.getConnection();
 						
 			sql = "delete from bank where id=? and account=?";
 
@@ -162,12 +128,7 @@ public class BankDBBean {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null) {
-				try { pstmt.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
-			if(conn != null) {
-				try { conn.close(); } catch(Exception e) { e.printStackTrace(); }
-			}
+			JDBCUtil.close(pstmt, conn);
 		}
 	}
 }

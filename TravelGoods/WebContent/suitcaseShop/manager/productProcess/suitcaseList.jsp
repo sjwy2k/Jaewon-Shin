@@ -4,7 +4,6 @@
 <%@ page import="SuitcaseShop.manager.ShopSuitcaseDataBean" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-
 <%@ include file="../../etc/color.jspf" %>
 
 <!DOCTYPE html>
@@ -12,9 +11,9 @@
 <head>
 <meta charset="UTF-8">
 <title>등록된 상품 목록</title>
-<link href="../../etc/suitcaseList.css" rel="stylesheet" type="text/css">
+<link href="../../etc/style.css" rel="stylesheet" type="text/css">
 </head>
-<body bgcolor="<%=bodyback_c %>">
+<body>
 <div class="container">
 <%! // 편리한 시간표시 - 24h
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm");
@@ -58,9 +57,9 @@ try {
 	} else if(suitcase_kind.equals("300")){
 		suitcase_kindName="28인치";
 	} else if(suitcase_kind.equals("400")){
-		suitcase_kindName="유/아동용 여행가방";
+		suitcase_kindName="하드케이스";
 	} else if(suitcase_kind.equals("500")){
-		suitcase_kindName="여행가방 악세사리";
+		suitcase_kindName="소프트케이스";
 	} else if(suitcase_kind.equals("all")){
 		suitcase_kindName="전체";
 	}
@@ -101,7 +100,7 @@ try {
 		<td align="center" width="200">상품 이름</td>
 		<td align="center" width="30">가격</td>
 		<td align="center" width="30">수량</td>
-		<td align="center" width="30">제조사</td>
+		<td align="center" width="100">제조사</td>
 		<td align="center" width="90">제조국가</td>
 		<td align="center" width="100">제조일</td>
 		<td align="center" width="30">상품 이미지</td>
@@ -114,7 +113,7 @@ try {
 		for(int i = 0; i < suitcaseList.size(); i++) {
 			ShopSuitcaseDataBean suitcase = (ShopSuitcaseDataBean)suitcaseList.get(i);
 	%>
-	<tr height="30">
+	<tr height="30" bgcolor="<%=bar %>">
 		<td width="30"><%=++number %></td>
 		<td width="50"><%=suitcase.getSuitcase_kind() %></td>
 		<td width="100"><%=suitcase.getSuitcase_title() %></td>
@@ -126,7 +125,7 @@ try {
 			<%=suitcase.getSuitcase_count() %>
 		<% }%>
 		</td>
-		<td width="70"><%=suitcase.getManufacturer() %></td>
+		<td width="100"><%=suitcase.getManufacturer() %></td>
 		<td width="90"><%=suitcase.getProduct_con() %></td>
 		<td width="100"><%=suitcase.getProduct_date() %></td>
 		<td width="50"><%=suitcase.getSuitcase_image() %></td>

@@ -14,6 +14,7 @@
 <link href="../../etc/style.css" rel="stylesheet" type="text/css">
 </head>
 <body bgcolor="<%=bodyback_c %>">
+<div class="container">
 <%
 String buyer = (String)session.getAttribute("id");
 %>
@@ -31,7 +32,7 @@ if(count == 0) {
 <h3><b>주문목록</b></h3>
 
 <table>
-	<tr>
+	<tr bgcolor="<%=value_c %>">
 		<td>구매목록이 없습니다</td>
 	</tr>
 </table>
@@ -43,7 +44,7 @@ if(count == 0) {
 <h3><b>주문목록</b></h3>
 <a href="../managerMain.jsp">관리자 메인으로</a>
 <table>
-	<tr>
+	<tr bgcolor="<%=value_c %>">
 		<td>주문번호</td>
 		<td>주문자</td>
 		<td>상품 이름</td>
@@ -60,7 +61,7 @@ if(count == 0) {
 		for(int i = 0; i < buyLists.size(); i++){
 			buyList = (BuyDataBean)buyLists.get(i);
 	%>
-	<tr>
+	<tr bgcolor="<%=bar %>">
 		<td><%=buyList.getBuy_id() %></td>
 		<td><%=buyList.getBuyer() %></td>
 		<td><%=buyList.getSuitcase_title() %></td>
@@ -76,5 +77,6 @@ if(count == 0) {
 	<%} %>
 </table>
 <%} %>
+</div>
 </body>
 </html>

@@ -47,7 +47,7 @@ try {
 	</tr>
 	<tr> 
 		<td width="100" bgcolor="<%=value_c %>">분류선택</td>
-		<td width="400" align="left"> <!-- 수정할 상품이 분류되었던 종류 조건으로 자동선택 -->
+		<td width="400" bgcolor="<%=bar %>" align="left"> <!-- 수정할 상품이 분류되었던 종류 조건으로 자동선택 -->
 			<select name="suitcase_kind">
 				<option value="100" 
 				<%if(suitcase.getSuitcase_kind().equals("100")) {%>selected<%} %>
@@ -58,12 +58,18 @@ try {
 				<option value="300" 
 				<%if(suitcase.getSuitcase_kind().equals("300")) {%>selected<%} %>
 				>28인치</option>
+				<option value="400" 
+				<%if(suitcase.getSuitcase_kind().equals("400")) {%>selected<%} %>
+				>하드케이스</option>
+				<option value="500" 
+				<%if(suitcase.getSuitcase_kind().equals("500")) {%>selected<%} %>
+				>소프트케이스</option>
 			</select>
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">상품명</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="50" maxlength="50" name="suitcase_title"
 			value="<%=suitcase.getSuitcase_title() %>"> 
 			<input type="hidden" name="suitcase_id" value="<%=suitcase_id %>">
@@ -71,35 +77,35 @@ try {
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">가격</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="10" maxlength="9" name="suitcase_price"
 			value="<%=suitcase.getSuitcase_price() %>">원
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">수량</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="10" maxlength="5" name="suitcase_count"
 			value="<%=suitcase.getSuitcase_count() %>">권
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">저자</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="10" maxlength="5" name="manufacturer"
 			value="<%=suitcase.getManufacturer() %>">
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">출판사</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="20" maxlength="30" name="product_con"
 			value="<%=suitcase.getProduct_con() %>">
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">출판일</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<select name="product_year">
 			<% 
 			Timestamp nowTime = new Timestamp(System.currentTimeMillis());
@@ -127,19 +133,19 @@ try {
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">이미지</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="file" name="suitcase_image">
 			<%=suitcase.getSuitcase_image() %>
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">내용</td>
-		<td width="400" align="left"><textarea name="suitcase_content" rows="13" cols="40"><%=suitcase.getSuitcase_content() %></textarea>
+		<td width="400" bgcolor="<%=bar %>" align="left"><textarea name="suitcase_content" rows="13" cols="40"><%=suitcase.getSuitcase_content() %></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">할인율</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="5" maxlength="2" name="discount_rate"
 			value="<%=suitcase.getDiscount_rate() %>">%
 		</td>

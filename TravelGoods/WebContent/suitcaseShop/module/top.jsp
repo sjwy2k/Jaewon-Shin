@@ -6,20 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style type="text/css"> 
+	 .gap {
+	 	margin-top : 20px;
+	 	padding : 10px;
+	 }
+</style>
 </head>
 <body bgcolor="<%=bodyback_c%>">
 <%
+String id = (String)session.getAttribute("id");
 try{
 	if(session.getAttribute("id") == null) { %>
+		
+		<br>
 		<a href="../shopping/list.jsp?suitcase_kind=all">전체목록보기</a>&nbsp;
 		<br>
-
-		<form method="post" action="../shopping/loginPro.jsp">
-			아이디 : <input type="text" name="id" size="15" maxlength="50">
-			비밀번호 : <input type="password" name="passwd" size="15" maxlength="16">
-			<input type="submit" value="로그인">
-		</form>
-		
+		<div class="gap">
+		<input type="button" value="로그인" 
+			onclick="javascript:window.location='../shopping/memberJoin/index.html'">		
+		<input type="button" value="회원가입" 
+			onclick="javascript:window.location='../shopping/memberJoin/joinMemberForm.jsp'">
+		</div>
+		<br>	
 		<font color="red">* 반드시 로그인을 하셔야 쇼핑몰을 이용하실 수 있습니다.*</font>
 	<%} else {%>
 	<a href="../shopping/list.jsp?suitcase_kind=all">전체목록보기</a>&nbsp;
@@ -31,6 +40,8 @@ try{
 	
 	<input type="button" value="로그아웃"
 		onclick="javascript:window.location='../shopping/logout.jsp'">
+	<input type="button" value="마이페이지"
+		onclick="javascript:window.location='../shopping/memberJoin/updateMemberForm.jsp?id=<%=id %>'">
 	<%}	
 } catch(Exception e) {
 	e.printStackTrace();

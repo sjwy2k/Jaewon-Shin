@@ -31,11 +31,9 @@ if(suitcase_kind.equals("100")) {
 } else if(suitcase_kind.equals("300")) {
 	suitcase_kindName="28인치";
 } else if(suitcase_kind.equals("400")) {
-	suitcase_kindName="유/아동용";
+	suitcase_kindName="하드케이스";
 } else if(suitcase_kind.equals("500")) {
-	suitcase_kindName="여행가방 악세서리";
-} else if(suitcase_kind.equals("all")) {
-	suitcase_kindName="전체";
+	suitcase_kindName="소프트케이스";
 }
 %>
 <div class="container">
@@ -85,13 +83,13 @@ if(suitcase_kind.equals("100")) {
 						<%} %>
 					</td>
 				</tr>
-				<tr height="30" bgcolor="<%=value_c%>">
+			<tr height="30" bgcolor="<%=bar%>">
 				<td width="350">제조사 : <%=suitcaseList.getManufacturer() %></td>
 			</tr>
-			<tr height="30" bgcolor="<%=value_c%>">
+			<tr height="30" bgcolor="<%=bar%>">
 				<td width="350">제조국가 : <%=suitcaseList.getProduct_con() %></td>
 			</tr>
-			<tr height="30" bgcolor="<%=value_c%>">
+			<tr height="30" bgcolor="<%=bar%>">
 				<td width="350">정가 
 	: <b><del><%=NumberFormat.getInstance().format(suitcaseList.getSuitcase_price())%></del></b>원<br>
 								할인가 : <b><font color="red" size="5">

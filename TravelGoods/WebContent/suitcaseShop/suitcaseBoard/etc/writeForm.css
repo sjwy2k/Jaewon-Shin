@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+	body {
+		background: url('../images/bg.jpg' ) no-repeat;
+		background-size: 100% 100%;
+		font-family: '맑은 고딕', '고딕', '굴림';
+	}	
+	.container {
+		width : 1000px;
+		height : 1000px; 
+		margin: 0 auto;
+		text-align: center;
+		font-size: 14px;
+	}	
+	header h1 {
+		padding-top: 100px;
+		font-weight: bold;
+		font-size: 25px;
+		margin: 0 auto;
+		font-size : 3em;	
+	}
+	section table {		
+		clear: both;
+		margin: 50px 0px 0px 100px;
+		background-color: #E8CEC2;
+		font-size:1.2em;	
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	.new {
+		float:right;
+		margin-right: 100px;
+	}
+	section {
+		margin-top : 80px;
+	}
+	section .menu {
+		background-color : #EDA900;
+		font-size : 15px;
+		font-weight: bold;
+		text-decoration : none;
+		color : #003A51;
+	}
+	section .content {
+		float:clear;
+		padding-left: 10px;
+	}
+	
+	section table tr td{
+		border : 1px solid black;
+		border-collapse : collapse;
+	}
+	section table tr td a{
+		text-decoration : none;
+		color : black;
+	}
+	.index, .new tr td, .new tr td a {
+		background-color : #EDA900;
+		text-decoration : none;
+		color : black;
+	}
+	footer {
+		margin-top: 20px;
+	}
+	footer a {
+		margin: 10px;
+		text-decoration : none;
+		color : black;
+		font-weight : bold;
+		font-size : 17px;	
+	}
+
+
+

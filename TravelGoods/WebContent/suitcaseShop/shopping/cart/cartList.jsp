@@ -47,7 +47,7 @@ if(session.getAttribute("id") == null) {
 <table>
 	<tr>
 		<td width="50">번호</td>
-		<td width="600">책이름</td>
+		<td width="600">상품 이름</td>
 		<td width="100">판매가격</td>
 		<td width="150">수량</td>
 		<td width="150">금액</td>

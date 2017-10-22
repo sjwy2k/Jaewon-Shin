@@ -9,6 +9,7 @@
 <link href="../../etc/style.css" rel="stylesheet" type="text/css">
 </head>
 <body bgcolor="<%=bodyback_c %>">
+<div class="container">
 <%
 String managerId = "";
 try {
@@ -38,6 +39,7 @@ try {
 		</tr>
 	</table>
 </form>
+</div>
 </body>
 </html>
 <%

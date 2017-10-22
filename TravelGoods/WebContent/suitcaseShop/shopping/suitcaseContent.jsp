@@ -50,25 +50,28 @@ if(suitcase_kind.equals("100")) {
 <div class="container">
 <form name="inform" method="post" action="cart/cartInsert.jsp">
 <table>
-	<tr>
-		<td rowspan="6" width="150">
-		<img src="../../imageFile/<%=suitcaseList.getSuitcase_image() %>"
-		border="0" width="150" height="200"></td>
+	<tr bgcolor="<%=value_c%>">
+		<td width="500" height="800">
+			<img src="../../imageFile/<%=suitcaseList.getSuitcase_image() %>"
+			border="0" height="100%">
+		</td>
+	</tr>
+	<tr bgcolor="<%=value_c%>">
 		<td>
 			<font size="+1"><b><%=suitcaseList.getSuitcase_title() %></b></font>
 		</td>
 	</tr>
-	<tr><td width="500">제조사 : <%=suitcaseList.getManufacturer() %></td></tr>
-	<tr><td width="500">제조국가 : <%=suitcaseList.getProduct_con() %></td></tr>
-	<tr><td width="500">생산일 : <%=suitcaseList.getProduct_date() %></td></tr>
-	<tr><td width="500">정가 
+	<tr bgcolor="<%=bar%>"><td width="500">제조사 : <%=suitcaseList.getManufacturer() %></td></tr>
+	<tr bgcolor="<%=bar%>"><td width="500">제조국가 : <%=suitcaseList.getProduct_con() %></td></tr>
+	<tr bgcolor="<%=bar%>"><td width="500">생산일자 : <%=suitcaseList.getProduct_date() %></td></tr>
+	<tr bgcolor="<%=bar%>"><td width="500">정가 
 : <del><b><%=NumberFormat.getInstance().format(suitcaseList.getSuitcase_price())%></b></del>원<br>
 						할인가 : <b><font color="red" size="5">
  <%=NumberFormat.getInstance().format((int)(suitcaseList.getSuitcase_price()*
 ((double)(100-suitcaseList.getDiscount_rate())/100))) %></font></b>원
 		</td>
 	</tr>
-	<tr>
+	<tr bgcolor="<%=bar%>">
 		<td width="500">수량 : <input type="text" size="5" name="buy_count" value="1">개
 		<%if(id.equals("not")) {
 			if(suitcaseList.getSuitcase_count()==0) {
@@ -95,7 +98,7 @@ if(suitcase_kind.equals("100")) {
 		onclick="javascript:window.location='shopMain.jsp'">
 		</td>
 	</tr>
-	<tr>
+	<tr bgcolor="<%=bar%>">
 		<td colspan="2" align="center">
 		<br><%=suitcaseList.getSuitcase_content() %></td>
 	</tr>

@@ -26,7 +26,7 @@
 		<td width="700" valign="top">
 			<jsp:include page="introList.jsp" flush="false"/>
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td width="150" valign="top">
 			<img src="../module/logo.jpg" border="0" width="90" height="60">

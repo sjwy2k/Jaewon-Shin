@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="SuitcaseShop.manager.ManagerDBBean" %>
-<%@ page import="SuitcaseShop.manager.ManagerDataBean" %>
+<%@ page import="SuitcaseShop.customer.CustomerDBBean" %>
+<%@ page import="SuitcaseShop.customer.CustomerDataBean" %>
 
 <% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
@@ -13,18 +13,31 @@
 <body>
 
 <%
-String managerId = request.getParameter("id");
-String managerPasswd = request.getParameter("passwd");
+	String id = request.getParameter("id");
+	String passwd = request.getParameter("passwd");
+	
+	CustomerDBBean memberPro = CustomerDBBean.getInstance();
+	CustomerDataBean member = new CustomerDataBean();
+	member.setId(id);
+	member.setPasswd(passwd);
+	
+	System.out.println(id);
+	System.out.println(passwd);
 
-ManagerDBBean managerPro = ManagerDBBean.getInstance();
-ManagerDataBean manager = new ManagerDataBean();
-manager.setManagerId(managerId);
-
-managerPro.deleteManager(managerId, managerPasswd);
+	int check = memberPro.deleteMember(id, passwd);
+	if(check == 1) {
+		session.invalidate();
 %>
-<script>
-	alert("관리자 계정이 삭제되었습니다.");
-	location.href="managerIdList.jsp";
-</script>
+	<script>
+		alert("쇼핑몰에서 성공적으로 탈퇴했습니다.");
+		location.href="../shopMain.jsp";
+	</script>
+<% } else { %>
+	<script>
+		alert("아이디가 존재하지 않습니다");
+		history.go(-1);
+	</script>
+<%	}	%>
+
 </body>
 </html>

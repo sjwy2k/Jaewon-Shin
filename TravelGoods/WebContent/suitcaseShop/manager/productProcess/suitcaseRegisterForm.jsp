@@ -33,49 +33,49 @@ action="suitcaseRegisterPro.jsp" enctype="multipart/form-data">
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">분류 선택</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<select name="suitcase_kind"> 
 				<option value="100">20인치</option>
 				<option value="200">24인치</option>
 				<option value="300">28인치</option>
-				<option value="400">유/아동용</option>
-				<option value="500">여행가방 악세서리</option>
+				<option value="400">하드케이스</option>
+				<option value="500">소프트케이스</option>
 			</select>
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">상품명</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="50" maxlength="50" name="suitcase_title">
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">가격</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="10" maxlength="9" name="suitcase_price">원
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">수량</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="10" maxlength="5" name="suitcase_count">개
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">제조사</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="20" maxlength="30" name="manufacturer">
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">제조국가</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="text" size="20" maxlength="30" name="product_con">
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">제조일</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<select name="product_year">
 				<%
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
@@ -96,19 +96,19 @@ action="suitcaseRegisterPro.jsp" enctype="multipart/form-data">
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">이미지</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<input type="file" name="suitcase_image">
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">상품 소개</td>
-		<td width="400" align="left">
+		<td width="400" bgcolor="<%=bar %>" align="left">
 			<textarea name="suitcase_content" rows="14" cols="40"></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td width="100" bgcolor="<%=value_c %>">할인율</td>
-		<td width="400" align="left"> <!-- maxlength는 2자리로, 할인율 과도입력방지-->
+		<td width="400" bgcolor="<%=bar %>" align="left"> <!-- maxlength는 2자리로, 할인율 과도입력방지-->
 			<input type="text" size="5" maxlength="2" name="discount_rate">
 		</td>
 	</tr>
