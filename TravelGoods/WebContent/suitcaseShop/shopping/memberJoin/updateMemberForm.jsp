@@ -34,7 +34,7 @@ member = memberPro.getMember(id);
 	    <button>회원 정보 수정하기 </button>		   	    
     </form>
     <form>
-   		<button style="background-color : #4948FF;" type="button" onclick="delChk();">탈퇴하기</button>
+   		<button style="background-color : #4948FF;" type="button" onclick="delChk();">쇼핑몰로 돌아가기</button>
    		<script>
    		function delChk() {
    			if(confirm("쇼핑몰에서 탈퇴하시겠습니까?")) {
@@ -45,7 +45,7 @@ member = memberPro.getMember(id);
    			}
    		}
    		</script>
-   		<a href="../shopMain.jsp"><p>쇼핑몰로 돌아가기</p></a>
+   		<a href="../shopMain.jsp"><p>탈퇴하기</p></a>
    	</form>    
   </div>
 </div>

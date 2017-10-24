@@ -16,14 +16,12 @@
 <a href="../shopping/list.jsp?suitcase_kind=300">28인치 캐리어</a><br>
 <a href="../shopping/list.jsp?suitcase_kind=400">하드케이스</a><br>
 <a href="../shopping/list.jsp?suitcase_kind=500">소프트케이스</a><br>
-<a href="../suitcaseBoard/board/list.jsp">게시판 보기</a>
 <%
 String id = (String) session.getAttribute("id");
-
 if(id == null) {
 %>	
 <%} else {%>
-	<a href="../shopping/list.jsp?suitcase_kind=all">전체목록보기</a><br>
+	<a href="../suitcaseBoard/board/list.jsp">게시판 보기</a>
 <%}%>
 </body>
 </html>

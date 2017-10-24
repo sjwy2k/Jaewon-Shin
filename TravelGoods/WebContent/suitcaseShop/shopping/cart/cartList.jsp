@@ -14,6 +14,7 @@
 <link href="../../etc/style.css" rel="stylesheet" type="text/css">
 </head>
 <body bgcolor="<%=bodyback_c %>">
+<div class="container2">
 <%
 String suitcase_kind = request.getParameter("suitcase_kind");
 String buyer = (String)session.getAttribute("id");
@@ -43,34 +44,37 @@ if(session.getAttribute("id") == null) {
 %>
 
 <h3>장바구니</h3>
-<!-- <form name="inform" method="post" action="updateCart.jsp"> -->
-<table>
-	<tr>
-		<td width="50">번호</td>
-		<td width="600">상품 이름</td>
-		<td width="100">판매가격</td>
-		<td width="150">수량</td>
-		<td width="150">금액</td>
-	</tr>
+<table width="1000">
 <%
 for(int i = 0; i<cartLists.size(); i++){
 	cartList = (CartDataBean)cartLists.get(i);
 %>	
 	<tr>
+		<td colspan="5">
+			<img 
+src="../../../imageFile/<%=cartList.getSuitcase_image()%>"
+			border="0" width="auto" height="100%" align="middle">	
+		</td>
+	</tr>
+	<tr bgcolor="<%=bodyback_c%>">
+		<td width="50">번호</td>
+		<td width="600">상품 이름</td>
+		<td width="100">판매가격</td>
+		<td width="30">수량</td>
+		<td width="150">금액</td>
+	</tr>	
+	<tr bgcolor="<%=bar%>">
 		<td width="50"><%=++number %></td>
 		<td width="600" align="left">
-			<img 
-src="../../imageFile/<%=cartList.getSuitcase_image()%>"
-			border="0" width="30" height="50" align="middle">
 			<%=cartList.getSuitcase_title() %>
 		</td>
 		<td width="100">
 <%=NumberFormat.getInstance().format(cartList.getBuy_price()) %>
 		</td>
-		<td width="150">
+		<td width="30">
 			<form method="post" action="updateCart.jsp">
-			<input type="text" name="buy_count" size="5"
-			value="<%=cartList.getBuy_count()%>">
+			<input type="text" name="buy_count"
+			value="<%=cartList.getBuy_count()%>" size="5">
 			<input type="hidden" name="cart_id"
 			value="<%=cartList.getCart_id()%>">
 			<input type="hidden" name="suitcase_kind"
@@ -86,13 +90,13 @@ src="../../imageFile/<%=cartList.getSuitcase_image()%>"
 		</td>
 	</tr>
 <%} %>	
-	<tr height="50">	
+	<tr height="50" bgcolor="<%=bar%>">	
 		<td colspan="5" align="right" class="result">
 			<b>총금액 : 
 <%=NumberFormat.getInstance().format(total) %></b>		
 		</td>
 	</tr>
-	<tr height="30">
+	<tr height="30" bgcolor="<%=bodyback_c	%>">
 		<td colspan="5">
 		<input type="button" value="구매하기" onclick=
 "javascript:window.location='../buy/buyForm.jsp'">
@@ -103,10 +107,10 @@ src="../../imageFile/<%=cartList.getSuitcase_image()%>"
 		</td>
 	</tr>
 </table>
-<!-- </form> -->
 <%
 	}
 }
 %>
+</div>
 </body>
 </html>

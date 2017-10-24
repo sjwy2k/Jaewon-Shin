@@ -211,7 +211,7 @@ private static ManagerDBBean instance = new ManagerDBBean();
 				dbpasswd = rs.getString("managerPasswd");
 				if(dbpasswd.equals(managerPasswd)) {
 					sql = "delete from manager where managerId=?";
-					conn.prepareStatement(sql);
+					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, managerId);
 					pstmt.executeUpdate();
 					x = 1;

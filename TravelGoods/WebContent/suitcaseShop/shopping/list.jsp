@@ -83,7 +83,7 @@ if(suitcase_kind.equals("100")) {
 						<%} %>
 					</td>
 				</tr>
-			<tr height="30" bgcolor="<%=bar%>">
+			<tr height="30" bgcolor="<%=bodyback_c%>">
 				<td width="350">제조사 : <%=suitcaseList.getManufacturer() %></td>
 			</tr>
 			<tr height="30" bgcolor="<%=bar%>">

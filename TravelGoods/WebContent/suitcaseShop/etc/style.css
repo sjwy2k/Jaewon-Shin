@@ -11,6 +11,13 @@ body {
 	padding : 20px;
 	border: 1pt solid silver;
 }
+
+.container2 {
+	margin: 0 auto;	
+	padding : 20px;
+	border: 1pt solid silver;	
+}
+
 .container form {
 	width : 1000px;
 	margin : 20px auto;
@@ -30,6 +37,15 @@ body {
 }
 
 .container table {
+	margin : 0 auto;
+	padding : 1px;
+	font-size: 15px;
+	text-align: center;
+	border: 1pt solid silver;
+	border-collapse : collapse;
+}
+
+.container2 table {
 	margin : 0 auto;
 	padding : 1px;
 	font-size: 15px;

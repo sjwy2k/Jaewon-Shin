@@ -15,6 +15,7 @@
 <link href="../etc/style.css" rel="stylesheet" type="text/css">
 </head>
 <body bgcolor="<%=bodyback_c%>">
+<div class="container">
 <%
 String buyer = (String)session.getAttribute("id");
 
@@ -115,5 +116,6 @@ onclick="javascript:window.location='../shopMain.jsp'">
 	}
 }
 %>
+</div>
 </body>
 </html>

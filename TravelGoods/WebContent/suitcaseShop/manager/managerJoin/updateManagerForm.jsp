@@ -16,7 +16,7 @@ String passwd = request.getParameter("passwd");
 <form method="post" action="updateManagerPro.jsp">
 <h3>관리자 계정 수정</h3>
 <label>아이디 : </label><input type="text" name="id" value="<%=id %>"><br>
-<input type="hidden" value="id2">
+<input type="hidden" name="id2" value="<%=id %>">
 <label>비밀번호 : </label><input type="password" name="passwd" value="<%=passwd %>"><br>
 <input type="submit" value="확인">&nbsp;
 			<input type="button" value="취소"
