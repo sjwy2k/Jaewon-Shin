@@ -4,13 +4,15 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<context:component-scan base-package="com.springbook.biz" />		
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
+
 	<!-- DataSource -->
 	<context:property-placeholder location="classpath:config/database.properties" />
 		
@@ -21,4 +23,31 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>		
+	
+	<!-- Spring JDBC 설정 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- Transaction 설정 -->
+	<!-- 트랜잭션 하는 메서드 -->
+	<bean id="txManager" 
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 어드바이스 하는 클래스 지정 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- advice를 걸었다. 위빙했다. -->
+	<aop:config>
+		<aop:pointcut id="txPointcut"
+					  expression="execution (* com.springbook.biz..*(..))" />
+		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+	</aop:config>
 </beans>

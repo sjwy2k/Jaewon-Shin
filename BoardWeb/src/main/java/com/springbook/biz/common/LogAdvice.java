@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Service;
 
 @Service // DI 주입
-@Aspect // AOP 설정
+//@Aspect // AOP 설정
 public class LogAdvice {
 	
 	@Pointcut("execution(* com.springbook.com..*Impl.*(..))")
